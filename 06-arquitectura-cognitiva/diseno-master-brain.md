@@ -83,6 +83,12 @@ La misma estructura que ingresa al grafo es la que sale en el Handshake y la que
 
 ## Cómo se alimenta
 
+### La asimilación de la Homeostasis Documental (Ruptura Bitemporal)
+Para que el grafo no sufra del **Documentation Drift**, la ingesta utiliza un **Enrutador Bitemporal Zero-Touch**:
+- **Memoria Evolutiva (HISTORIA/Reportes):** Se descarta el `mtime` del SO. Se usan barridos Regex para extraer la fecha intrínseca de creación y soldar el conocimiento a su instante original.
+- **Baseline Canónico (LEYES/ESTADO):** Se extrae el microsegundo exacto de la modificación binaria, avisando al Grafo que el canon estructural ha cambiado en la actualidad.
+Adicionalmente, se ejecuta una ingesta paralela auditando el código fuente (AST) para mitigar la falibilidad documental humana.
+
 ### El bootstrap — cómo nace el grafo
 
 El grafo nace en el Día 1, no antes.

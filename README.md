@@ -114,6 +114,7 @@ GLOSARIO.md  ← definiciones de referencia rápida con links a los documentos f
 ```
 05-evidencia/genesis-y-metricas-sprint.md
 → 05-evidencia/tablas-datos-empiricos.md
+→ 05-evidencia/validacion-empirica-v5.md
 ```
 
 ---
@@ -133,10 +134,12 @@ Para cualquiera que sospecha que hay una forma mejor y quiere ver los números a
 | Concepto | Qué significa |
 |---|---|
 | **CPU / GPU** | El humano diseña la intención; la IA ejecuta el volumen |
+| **Autopoiesis (V5)** | El sistema abstrae matemáticamente su código (Sensor AST) para defender sus leyes endógenamente |
 | **Patrón C-1** | Pre-computar el dominio antes de abrir el IDE |
 | **Trauma Empaquetado** | Los fallos se encapsulan y se procesan solos, sin despertar a nadie |
 | **Exocórtex** | La memoria del sistema vive en el código, no en la cabeza del Arquitecto |
 | **Abandono Preparado** | El sistema sobrevive estructuralmente a la ausencia de su creador |
+| **Canje SRE / Zero-Waste** | Erradicación de deuda técnica diaria apoyando el Grafo Maestro sobre actualización de deltas I/O Cero |
 | **Protocolo PEAP-V5** | Ciclo determinista de 6 días (144hs) para construir sistemas de grado enterprise |
 
 ---

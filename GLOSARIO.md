@@ -27,6 +27,15 @@ El cuarto tipo de hardcoding letal: re-explicar el stack, las convenciones y las
 **Abandono Preparado**
 Estado de madurez sistémica donde el sistema puede operar sin intervención humana indefinidamente — sanando sus propios fallos, procesando sus propias colas de error, sobreviviendo a la ausencia de su creador. → [`01-teoria/abandono-preparado.md`](01-teoria/abandono-preparado.md)
 
+**Documentation Drift (Amnesia Temporal)**
+Fricción donde la percepción de la IA del sistema a través de RAG desfasa con la realidad del código. Se mitiga mediante el patrón C-6 de Homeostasis Documental.
+
+**Autoconsciencia Estructural (Autopoiesis)**
+Estado alcanzado cuando el ecosistema contiene un modelo de su propio código y restricciones (Sensor AST + Grafo Semántico), permitiéndole razonar y diferenciar lógica nativa de lógica invasora endógenamente.
+
+**Organismo Informático vs Herramienta**
+Una "herramienta" es un procesador de I/O que colapsa ante el fallo; un "organismo informático" (Nivel 5) redirige internamente su propia asfixia hacia su sistema linfático (DLQ) mediante introspección estática.
+
 ---
 
 ## Patrones
@@ -45,6 +54,9 @@ Separación de la memoria de los agentes IA en dos hemisferios: Hemisferio A (co
 
 **C-5 — Diagnóstico con Restricciones (ReAct Zero-Trust)**
 Los agentes operativos siguen un protocolo de pasos fijos que ancla sus respuestas a evidencia extraída de herramientas concretas. Prohibido el razonamiento abductivo sin evidencia instrumental. → [`02-framework/patrones-auto-healing.md`](02-framework/patrones-auto-healing.md)
+
+**C-6 — Homeostasis Documental y Bitemporalidad**
+Enrutamiento automatizado para el Grafo Maestro que erradica el Documentation Drift. Diferencia la *Memoria Evolutiva* (inmutable, extraída por Regex) del *Baseline Canónico* (mutable, regido por fstat). Cierra el ciclo de Abandono Preparado mediante ingesta del AST de sistema. → [`07-avances/homeostasis-documental-bitemporal.md`](07-avances/homeostasis-documental-bitemporal.md)
 
 **A-1 — Adaptador de Dominio Universal**
 Capa única que traduce el caos externo (APIs hostiles, protocolos legados, errores crípticos) al lenguaje interno del sistema. Ningún otro módulo habla con el tercero directamente. → [`02-framework/framework-vision-general.md`](02-framework/framework-vision-general.md)
@@ -88,6 +100,15 @@ El perímetro se defiende en el punto de entrada del dato — cliente/browser/ed
 
 **Arbitraje temporal**
 Construir asumiendo que todos los proveedores externos responden correctamente ("APIs Mágicas") durante los Días 2–3, para no bloquear el momentum. Los cables reales se conectan en el Día 4. → [`02-framework/protocolo-peap-v5-144h.md`](02-framework/protocolo-peap-v5-144h.md)
+
+**Sincronización Zero-Waste**
+Mecanismo donde la extracción del Exocórtex se vincula al sistema de diffs del código, ingiriendo únicamente la fricción delta en vez de re-ejecutar lecturas frías. Elimina I/O ineficiente al actualizar la Memoria Bitemporal.
+
+**Inyección Determinista L2 (Gobernanza AST)**
+Sensor pre-compilado forense que disecciona el AST de una pieza de software antes de asimilarla. Exige la propiedad estática de "Trauma Empaquetado". Si no está, el sistema expulsa el código, evitando el error biológico (Capa 8).
+
+**Canje SRE (Site Reliability Engineering Trade-off)**
+Filosofía donde el Arquitecto erradica toda Deuda Técnica Ordinaria (micro-fricciones, timeouts locales) y asume un único Riesgo Estructural Macro a cambio. Se toleran colapsos masivos raros a expensas de purificar la tranquilidad local del día a día.
 
 ---
 
