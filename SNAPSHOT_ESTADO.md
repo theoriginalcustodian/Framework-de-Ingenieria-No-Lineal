@@ -55,7 +55,7 @@ Este repo **no** está en un ciclo fundacional PEAP-V5. Es el Exocórtex canóni
 - **D** — ADR formal completo (vs ADR mínimo) por impacto transversal
 - **E** — Interfaz dual: slash command + skill `inl-graph-oracle`
 - **F** — Ontología v2 especializada por grafo: 5 entities + 6 edges por grafo (40-50% margen evolutivo). Rediseñada sobre v1 (10/10 uniforme) aplicando navaja Ockham + Ley F-1 Anti-Hardcoding + Ley F-5 Adaptadores
-- **G** — Proyecto Zep dedicado `inl-framework` (aislado de ARCA y `david_brain`)
+- **G** — Proyecto Zep dedicado `inl-framework` (aislado de proyectos Zep existentes del operador)
 - **H** — Nodalización Camino C: `json` + `fact_triple` declarativo para canonical (determinístico), mixto controlado para evidence, cross-graph por UUID vía regex `(F|O|R|C|A|G|AP|Dia)-\d+`
 
 **Validaciones empíricas ejecutadas (2 spikes V-RES):**
@@ -79,7 +79,7 @@ Este repo **no** está en un ciclo fundacional PEAP-V5. Es el Exocórtex canóni
 ### Para ejecutar Fases 2-5
 
 5. 🟡 **Fase 2.0 — Extracción de `lib/` Node compartida** — próximo bloqueante (ADR-002 aprobado 2026-04-20). Requiere: leer los 4 scripts ARCA (`zep_sensor_emitter.js`, `zep_pr_ingest.js`, `zep_daily_emitter.js`, `zep_narrative_emitter.js`) → extraer funciones puras parametrizables a 6 módulos `lib/` → unit tests vitest → catálogo `docs/lecciones_heredadas_de_arca.md` con 13+ lecciones empíricas.
-6. ⚪ **Fase 2.1 — Ingesta bootstrap canonical (Node)** — requiere Fase 2.0. Switch a tenant `inl_framework` (raw key o fix MCP) → `bootstrap_graphs.py --apply` (Python) → `setup_ontology.py --apply` (Python) → `canonical_ingester.js` consumiendo `lib/` → smoke test + `audit_edge_entropy.py` pasa.
+6. ⚪ **Fase 2.1 — Ingesta bootstrap canonical (Node)** — requiere Fase 2.0. Cargar `ZEP_API_KEY` del proyecto INL en `.env` → `bootstrap_graphs.py --apply` (Python) → `setup_ontology.py --apply` (Python) → `canonical_ingester.js` consumiendo `lib/` → smoke test + `audit_edge_entropy.py` pasa.
 7. ⚪ Fase 3 — `evidence_ingester.js` con detección bitemporal + cross-graph UUID
 8. ⚪ Fase 4 — `delta_ingester.js` post-merge con GitHub Action
 9. ⚪ Fase 5 — Integración Claude Code (slash + skill)

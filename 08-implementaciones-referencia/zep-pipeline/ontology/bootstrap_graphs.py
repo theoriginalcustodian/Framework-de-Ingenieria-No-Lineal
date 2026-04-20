@@ -10,7 +10,7 @@ hasta que los ingesters esten listos.
 
 Precondicion:
 - Proyecto Zep `inl-framework` creado via dashboard (no hay API para crear proyectos).
-- `ZEP_API_KEY` del proyecto INL cargada en env (ver memoria del sprint §4).
+- `ZEP_API_KEY` del proyecto INL cargada en env (ver `.env.example`).
 
 Uso:
     python bootstrap_graphs.py --dry-run

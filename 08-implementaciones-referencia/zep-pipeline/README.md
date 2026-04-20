@@ -142,8 +142,8 @@ node ingesters/delta_ingester.js
 - **Schema de metadata:** `docs/metadata_schema.md`
 - **Política de ingesta:** `docs/ingestion_policy.md`
 - **Catálogo de lecciones heredadas:** `docs/lecciones_heredadas_de_arca.md` (a crear en Fase 2.0)
-- **Scripts fuente ARCA (referencia solo):** `C:\Proyectos\Claude\Claude code\Agencia_IA_HyC\Aplicacion Arca\aplicacion-arca-fe\_scripts_v5_cibernetica\` — `zep_sensor_emitter.js`, `zep_pr_ingest.js`, `zep_daily_emitter.js`, `zep_narrative_emitter.js`
+- **Scripts fuente ARCA (referencia solo, repo privado del operador):** carpeta `_scripts_v5_cibernetica/` — `zep_sensor_emitter.js`, `zep_pr_ingest.js`, `zep_daily_emitter.js`, `zep_narrative_emitter.js`
 - **Decisión H (cross-graph UUID):** `REGISTRO_TRAUMAS.md 2026-04-20 Naming canónico uniforme`
 - **Decisión I (stack Node compartido):** `REGISTRO_TRAUMAS.md 2026-04-20 Migración del pipeline INL-ZepBrain a Node compartido con ARCA`
-- **Memoria del sprint:** `~/.claude/projects/.../memory/project_sprint_inl_zepbrain.md`
+- **Memoria auto-managed del sprint:** archivo privado del operador (`project_sprint_inl_zepbrain.md` en la memoria local del agente) — no commiteada al repo
 - **Framework canónico:** `01-teoria/` → `08-implementaciones-referencia/`

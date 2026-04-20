@@ -71,8 +71,8 @@ La verdad canónica de la estructura vive en `CONSTITUCION.md § Mapa Canónico 
 
 ## 7. 🔗 Relación con otros proyectos
 
-- **Suite ARCA** (`C:\Proyectos\Claude\Claude code\Agencia_IA_HyC\Aplicacion Arca\`) — proyecto fuente principal. Muchos patrones del framework emergieron acá (C-3 Bidireccional, ADR-006 meta-validación, Trauma Empaquetado aplicado a n8n, etc.).
-- **ARCA mantiene snapshot local** en `aplicacion-arca-fe/docs/15_Estandares_Documentacion/framework_inl_referencia/` (PR #235). Ese snapshot NO se edita directamente — se re-sincroniza desde este repo si cambia.
+- **Suite ARCA** — proyecto fuente principal (repo privado del operador). Muchos patrones del framework emergieron acá (C-3 Bidireccional, ADR-006 meta-validación, Trauma Empaquetado aplicado a n8n, etc.).
+- **ARCA mantiene snapshot local del framework** en `aplicacion-arca-fe/docs/15_Estandares_Documentacion/framework_inl_referencia/` (PR #235 en su repo privado). Ese snapshot NO se edita directamente — se re-sincroniza desde este repo si cambia.
 
 ---
 

@@ -46,11 +46,9 @@ La decisión se compone de 8 componentes coordinados, cada uno con estado CPU ap
 
 ### Componente 2 — Proyecto Zep dedicado al framework INL
 
-Los 2 grafos viven en **proyecto Zep nuevo dedicado** (`inl-framework`), aislado de:
-- Proyecto ARCA (donde viven los 4 grafos ARCA)
-- Proyecto `david_brain` (exocórtex personal del operador + grafo experimental `master-v5-methodology` descartable + grafo operativo `arca-suite-knowledge` intocable)
+Los 2 grafos viven en **proyecto Zep nuevo dedicado** (`inl-framework`), aislado de otros proyectos Zep del operador (proyectos fuente que aplican INL + proyectos personales).
 
-Esto garantiza separación de dominios, evita herencia de ontología project-wide ajena (ARCA inyecta 7 tipos específicos; david_brain inyecta 8 tipos de modelado cognitivo), y simplifica permisos/credenciales.
+Esto garantiza separación de dominios, evita herencia de ontología project-wide ajena de otros proyectos, y simplifica permisos/credenciales.
 
 ### Componente 3 — Ontología v2 especializada por grafo
 
@@ -236,9 +234,8 @@ Consecuencia: **la ingesta 100% `text` con extracción LLM no provee garantías 
   - Cada nuevo patrón formalizado en `03-patrones/` se ingesta como `Patron` en canonical
 
 - **Sin impacto sobre:**
-  - Proyecto ARCA y sus 4 grafos (proyecto Zep distinto)
-  - Proyecto `david_brain` y sus 2 grafos (proyecto Zep distinto)
-  - GEMINI.md y flujos Antigravity (memory feedback `feedback_gemini_intacto`)
+  - Proyectos Zep existentes del operador (proyectos fuente + personales — todos viven en proyectos Zep distintos)
+  - GEMINI.md y flujos Antigravity
 
 ---
 

@@ -248,7 +248,7 @@ Incidente P09/P15 de ARCA. El delta ingester filtra archivos borrados — nunca 
 {
   "entity_name": "ARCA",
   "nombre_completo": "Suite de Automatización ARCA",
-  "repo_url": "C:/Proyectos/Claude/Claude code/Agencia_IA_HyC/Aplicacion Arca",
+  "repo_url": "<repo privado del operador>",
   "stack_csv": "n8n,supabase,nextjs-14,typescript",
   "fase_peap_actual": "Sprint-360h",
   "activo": true,

@@ -15,7 +15,7 @@ El ADR-001 cerró Fase 1 prescribiendo un **pipeline dual Python/Node.js** para 
 - **Python:** `bootstrap_graphs.py`, `setup_ontology.py`, `canonical_ingester.py`, `evidence_ingester.py`
 - **Node.js:** `delta_ingester.js` (Fase 4)
 
-Al abrir Fase 2 en sesión 2, GPU realizó V-INT sobre el repo ARCA hermano (`C:\Proyectos\Claude\Claude code\Agencia_IA_HyC\Aplicacion Arca\aplicacion-arca-fe\_scripts_v5_cibernetica\`) y encontró **4 scripts Node.js productivos** que ya resuelven empíricamente el problema que INL se disponía a re-implementar en Python:
+Al abrir Fase 2 en sesión 2, GPU realizó V-INT sobre el repo ARCA hermano (repo privado del operador, carpeta `_scripts_v5_cibernetica/`) y encontró **4 scripts Node.js productivos** que ya resuelven empíricamente el problema que INL se disponía a re-implementar en Python:
 
 | Script ARCA | Función | Lecciones empíricas acumuladas |
 |---|---|---|

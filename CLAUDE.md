@@ -88,8 +88,8 @@ Antes de presentar cualquier propuesta arquitectónica (crear/modificar ADR, ski
 ## 7. 🪟 Convenciones de entorno (Windows 11 + bash)
 
 - Shell: bash (usar sintaxis Unix, no Windows — `/dev/null` no `NUL`, barras inclinadas hacia adelante en paths).
-- Paths absolutos: `C:\Proyectos\Claude\Claude code\Repositorio Ingenieria No Lineal\...`
-- En comandos bash: `"C:/Proyectos/Claude/Claude code/Repositorio Ingenieria No Lineal/..."` (forward slashes, comillas por los espacios).
+- En Windows, los paths del repo usan backslashes (`...\Repositorio Ingenieria No Lineal\...`).
+- En comandos bash sobre Windows: forward slashes + comillas (`".../Repositorio Ingenieria No Lineal/..."`) por los espacios del nombre.
 
 ---
 

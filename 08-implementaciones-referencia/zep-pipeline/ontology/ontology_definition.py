@@ -349,12 +349,12 @@ class Referencia(BaseModel):
 
 
 class ProyectoFuente(InlEntityBase):
-    """Proyecto real que aplica INL (ej. ARCA, david_brain)."""
+    """Proyecto real que aplica INL (ej. ARCA)."""
 
     entity_name: str = Field(
         ...,
         max_length=50,
-        description="Nombre corto canonico del proyecto. Ej: 'ARCA', 'david_brain'.",
+        description="Nombre corto canonico del proyecto. Ej: 'ARCA'.",
     )
     nombre_completo: str = Field(
         ..., description="Nombre expandido. Ej: 'Suite de Automatizacion ARCA'."
