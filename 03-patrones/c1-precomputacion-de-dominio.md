@@ -22,6 +22,42 @@ El Patrón C-1 rompe ese ciclo antes de que empiece. La actividad de decodificar
 
 ---
 
+## Secuencia temporal del patrón
+
+```mermaid
+sequenceDiagram
+    participant Arq as Arquitecto
+    participant IA as IA investigativa
+    participant Doc as REGLAS_NEGOCIO.md
+    participant IDE as IDE
+
+    Note over Arq,IDE: Fase C-1 — ABSORCIÓN (IDE cerrado)
+
+    Arq->>IA: ¿Qué endpoints existen y qué exponen?
+    IA-->>Arq: Mapa de servicios + docs sintetizadas
+    Arq->>IA: ¿Cuáles son los puntos hostiles?
+    IA-->>Arq: Rate limits, protocolos legados, auth no estándar
+    Arq->>Doc: Consolidar reglas + contratos + workarounds
+
+    Note over Arq,IDE: Test de salida — 4 preguntas de memoria
+
+    alt Arquitecto responde todo sin consultar
+        Arq->>IDE: Abrir IDE — Fase CONSTRUCCIÓN
+    else Alguna pregunta sin respuesta
+        Arq->>IA: Continuar interrogatorio
+    end
+
+    Note over Arq,IDE: Fase CONSTRUCCIÓN (dominio ya cerrado)
+
+    Arq->>IDE: Ejecutar arquitectura pre-diseñada
+    IDE-->>Doc: Si surge duda de dominio, PAUSAR
+    Doc-->>Arq: Actualizar reglas y reanudar
+```
+
+Los dos modos son incompatibles cognitivamente — se ejecutan en fases secuenciales, nunca en paralelo.
+
+---
+
 ## Anatomía de la pre-computación
 
 El proceso no consiste en lectura pasiva de manuales. Es un **interrogatorio activo asistido por IA investigativa**.

@@ -41,6 +41,42 @@ Un **Agente de Recuperación Asíncrona** opera en ciclos de baja demanda — ma
 - Si la causa fue **transitoria** (infraestructura del proveedor): reinyecta la transacción en el punto exacto de fallo original
 - Si la causa fue **lógica** (error de negocio): cataloga el trauma para revisión humana sin bloquear el sistema
 
+### Secuencia temporal del patrón
+
+```mermaid
+sequenceDiagram
+    participant Op as Operación usuario
+    participant Sist as Sistema
+    participant Ext as Proveedor externo
+    participant DLQ as Cola DLQ
+    participant Agt as Agente recuperación
+    participant Hum as Humano
+
+    Note over Op,Hum: Tiempo T0 — Fallo detectado
+    Op->>Sist: Solicitar operación
+    Sist->>Ext: Invocar servicio externo
+    Ext--xSist: Timeout 503 / Gateway caído
+    Sist->>Sist: Capturar payload + estado + metadatos
+    Sist->>DLQ: Empaquetar Trauma (atómico, inmutable)
+    Sist-->>Op: Estado "procesamiento diferido" (honesto)
+    Sist->>Op: Continuar con el resto del batch
+
+    Note over Agt,Hum: Tiempo T1 — Ciclo de baja demanda (ej. madrugada)
+    Agt->>DLQ: Patrullar traumas pendientes
+    loop Por cada trauma
+        Agt->>Agt: Clasificar causa
+        alt Causa transitoria (infra del proveedor)
+            Agt->>Ext: Reinyectar transacción
+            Ext-->>Agt: Éxito
+            Agt->>DLQ: Marcar resuelto
+        else Causa lógica (error de negocio)
+            Agt->>Hum: Catalogar para revisión (sin bloquear)
+        end
+    end
+
+    Note over Op,Hum: El humano NO fue despertado a las 3am
+```
+
 ### Por qué genera resiliencia extrema
 
 El sistema asume que los servicios externos *fallarán por diseño*. Al empaquetar el fallo como una señal recuperable, transforma incidentes de soporte en latencias asíncronas automáticas. Lo que antes era una alerta de madrugada se convierte en una cola que se procesa sola.

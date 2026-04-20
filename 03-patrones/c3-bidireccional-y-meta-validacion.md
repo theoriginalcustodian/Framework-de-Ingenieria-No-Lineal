@@ -78,6 +78,48 @@ Registro simple de cada propuesta arquitectónica:
 
 Ratio hit/total es la métrica. Objetivo a largo plazo: ≥70%. Umbral de alarma: <50% → el diseño falla y requiere iteración.
 
+### Secuencia temporal del patrón
+
+```mermaid
+sequenceDiagram
+    participant Arq as Arquitecto
+    participant Ag as Agente IA
+    participant Reg as Regla (CLAUDE.md §11)
+    participant SC as Skill /framework-self-check
+    participant Exo as Exocórtex (ADRs + patrones)
+    participant Trk as Tracking empírico
+
+    Arq->>Ag: Plantea problema arquitectónico
+
+    Note over Ag,Reg: Detección del trigger
+    Reg-->>Ag: Trigger detectado — invocar self-check
+
+    Note over SC,Exo: Consulta BIDIRECCIONAL al exocórtex
+    Ag->>SC: Invocar con propuesta en 1 línea
+    SC->>Exo: Consultar patrones relevantes
+    Exo-->>SC: A-1, Hardcoding, V-EXT, V-INT, V-RES
+
+    loop Las 5 preguntas del framework
+        SC->>SC: Evaluar propuesta contra patrón
+    end
+
+    alt 5 × NO (propuesta pragmática defendible)
+        SC-->>Ag: "5×NO — propuesta directa aprobada"
+        Ag-->>Arq: Plan v1 (único plan)
+    else 1+ × SÍ (oportunidad paramétrica detectada)
+        SC-->>Ag: Plan v1 + Plan v2 + recomendación
+        Ag-->>Arq: Plan v1 + Plan v2 + recomendación
+        Arq->>Ag: Elige (C-2 preservado)
+    end
+
+    Ag->>Trk: Registrar HIT (auto-invocado)
+    Note over Trk: Métrica empírica para iterar
+
+    Note over Arq,Trk: El humano NO tuvo que forzar re-evaluación
+```
+
+El elemento clave: **la consulta al exocórtex ocurre ANTES de la respuesta al Arquitecto, no después**. Esa es la diferencia estructural con C-3 unidireccional.
+
 ---
 
 ## Validación empírica

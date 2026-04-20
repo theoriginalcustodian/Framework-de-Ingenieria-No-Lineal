@@ -49,6 +49,47 @@ El costo no son los segundos perdidos — es que el sistema **transfiere la frag
 
 Tres fases desacopladas temporalmente, comunicadas exclusivamente a través de estado persistente (típicamente en la base de datos).
 
+### Diagrama de secuencia
+
+```mermaid
+sequenceDiagram
+    participant U as Usuario
+    participant FE as Frontend
+    participant DB as Tabla Intenciones
+    participant Motor as Motor asíncrono
+    participant Ext as Proveedor externo
+    participant Ev as Tabla Eventos
+
+    Note over U,Ev: Fase 1 — Registro de Intención (sincrónico, <1s)
+    U->>FE: Solicitar operación
+    FE->>DB: INSERT intención (estado=pendiente)
+    DB-->>FE: tracking_id
+    FE-->>U: Confirmación inmediata + tracking_id
+    FE->>Ev: Suscribirse a tracking_id (realtime)
+
+    Note over Motor,Ext: Fase 2 — Procesamiento (asíncrono, minutos)
+    DB->>Motor: Trigger detecta estado=pendiente
+    Motor->>Motor: UPDATE estado=procesando
+    Motor->>Ext: Invocar servicio externo
+    alt Servicio responde OK
+        Ext-->>Motor: Resultado exitoso
+        Motor->>DB: UPDATE estado=exitoso + resultado
+    else Servicio falla
+        Ext--xMotor: Timeout / Error
+        Motor->>DB: UPDATE estado=fallido + trauma
+        Note over Motor: (A-4 Trauma Empaquetado se activa)
+    end
+
+    Note over U,Ev: Fase 3 — Emisión de Resultado (realtime, <1s)
+    DB->>Ev: Change detectado
+    Ev-->>FE: Push del nuevo estado
+    FE-->>U: Actualizar UI sin polling
+```
+
+El usuario nunca hereda la latencia del proveedor externo. El hilo se libera tras Fase 1.
+
+
+
 ### Fase 1 — Registro de Intención
 
 El usuario solicita una operación. El sistema:
