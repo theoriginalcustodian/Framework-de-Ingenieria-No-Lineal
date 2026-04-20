@@ -58,6 +58,18 @@ Los agentes operativos siguen un protocolo de pasos fijos que ancla sus respuest
 **C-6 — Homeostasis Documental y Bitemporalidad**
 Enrutamiento automatizado para el Grafo Maestro que erradica el Documentation Drift. Diferencia la *Memoria Evolutiva* (inmutable, extraída por Regex) del *Baseline Canónico* (mutable, regido por fstat). Cierra el ciclo de Abandono Preparado mediante ingesta del AST de sistema. → [`07-avances/homeostasis-documental-bitemporal.md`](07-avances/homeostasis-documental-bitemporal.md)
 
+**C-3 Bidireccional — Exocórtex Consultable como Gate Pre-Decisión**
+Extensión del patrón C-3 original. El exocórtex no es solo destino de escritura (registro de decisiones), sino fuente consultable obligatoria antes de tomar nuevas decisiones arquitectónicas. El agente que escribe al exocórtex también lo consulta como constraint antes de proponer. Se implementa con tres componentes: regla textual persistente + skill ejecutable de auto-validación + métrica empírica de ratio de auto-invocación. → [`03-patrones/c3-bidireccional-y-meta-validacion.md`](03-patrones/c3-bidireccional-y-meta-validacion.md)
+
+**Meta-Validación del Agente**
+Aplicación del patrón C-3 Bidireccional al propio agente IA. Antes de proponer arquitectura al Arquitecto humano, el agente invoca auto-validación contra el framework, produciendo Plan v1 (pragmático) + Plan v2 (no-lineal) + recomendación. Reduce la dependencia de intervención humana para detectar anti-patrones. Validación empírica documentada: baseline 0% → 100% en primera sesión post-implementación. → [`05-evidencia/validacion-meta-framework.md`](05-evidencia/validacion-meta-framework.md)
+
+**Skill Meta vs Skill Operativa**
+Distinción entre dos tipos de skills en un proyecto bajo Ingeniería No Lineal. Las **skills operativas** son invocadas por el humano para resolver problemas del backlog. Las **skills meta** son invocadas por el propio agente sobre sí mismo — autonomía disciplinada sin intervención humana. El ejemplo canónico es `/framework-self-check`. → [`07-avances/framework-self-check-skill.md`](07-avances/framework-self-check-skill.md)
+
+**Implementation-Bias**
+Sesgo sistémico observado en agentes IA asistentes: tendencia a proponer "implementar ya" sobre "esperar evidencia empírica". Probablemente herencia de optimización hacia "ser útil" durante entrenamiento. El patrón C-3 Bidireccional opera como fuerza restauradora contra este sesgo, redirigiendo hacia disciplina empírica mediante auto-consulta al framework. → [`05-evidencia/validacion-meta-framework.md`](05-evidencia/validacion-meta-framework.md)
+
 **A-1 — Adaptador de Dominio Universal**
 Capa única que traduce el caos externo (APIs hostiles, protocolos legados, errores crípticos) al lenguaje interno del sistema. Ningún otro módulo habla con el tercero directamente. → [`02-framework/framework-vision-general.md`](02-framework/framework-vision-general.md)
 
