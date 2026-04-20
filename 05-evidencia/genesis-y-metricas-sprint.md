@@ -72,12 +72,17 @@ Los hitos corresponden a los días de trabajo activo dentro de un sprint calenda
 
 El sprint fundacional tomó **15 días calendario** desde la investigación inicial hasta el cierre de gobernanza — incluyendo fines de semana, pausas y días sin trabajo activo.
 
-El factor de aceleración observado respecto al paradigma lineal (equipo de 3-5 desarrolladores):
+**Qué es verificable directamente:**
 
-- **En tiempo de entrega (días calendario):** 8x–12x más rápido que la estimación para un equipo estándar.
-- **En persona-días de desarrollo:** más de 20x — 15 días de 1 persona vs los 240+ persona-días que requeriría el paradigma lineal para el mismo sistema.
+- El volumen construido (módulos, tablas, flujos, documentos) está registrado en el repositorio original y es auditable contra commits
+- Los 15 días calendario están delimitados por timestamps de primer y último commit del sprint
+- Los parches y defectos corregidos el Día 4 están en el historial de git del período de auditoría
 
-La causa no es velocidad de tipeo. Es la eliminación sistemática de las fuentes de fricción antes de escribir la primera línea de código — y la separación estricta entre el Arquitecto que decide y la IA que ejecuta volumen.
+**Qué es estimación comparativa:**
+
+Respecto a cuánto tomaría el mismo sistema en paradigma lineal (equipo de 3-5 desarrolladores), no existe un benchmark controlado replicado — es una estimación del Arquitecto basada en experiencia de proyectos previos. Como orden de magnitud: un sistema con esta densidad de capas (UI, persistencia con RLS, orquestación de integraciones, gobernanza) típicamente requiere varios meses de equipo estándar, lo que sugiere un ratio de aceleración de al menos un orden de magnitud en persona-días. El número exacto no es el punto.
+
+La causa atribuida no es velocidad de tipeo. Es la eliminación sistemática de las fuentes de fricción antes de escribir la primera línea de código — y la separación estricta entre el Arquitecto que decide y la IA que ejecuta volumen. Los lectores escépticos pueden evaluar el caso contra sus propios proyectos de referencia.
 
 ---
 
