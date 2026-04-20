@@ -1,0 +1,20 @@
+# Pipeline Python — deps runtime
+# Fase 1: solo ontologia. Fase 2+ agrega deps de ingesta.
+
+# SDK Zep Cloud (oficial)
+zep-cloud>=2.0.0
+
+# Pydantic v2 (ontologia y validacion de metadata)
+pydantic>=2.5.0
+
+# Parseo frontmatter YAML (ingesta canonical)
+python-frontmatter>=1.0.0
+
+# Timezone bitemporal (R7 FIX)
+# NOTA: Python >=3.9 incluye zoneinfo nativo — no necesita pytz
+
+# Testing (audit_edge_entropy + queries validacion)
+pytest>=7.4.0
+
+# .env loader
+python-dotenv>=1.0.0
