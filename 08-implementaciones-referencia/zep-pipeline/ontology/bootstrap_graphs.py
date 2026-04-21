@@ -41,8 +41,9 @@ GRAPH_DESCRIPTIONS: dict[str, str] = {
 
 
 def _graph_exists(client: Any, graph_id: str) -> bool:
-    existing = {g.graph_id for g in client.graph.list_all()}
-    return graph_id in existing
+    response = client.graph.list_all(page_number=1, page_size=100)
+    graphs = response.graphs if hasattr(response, "graphs") else []
+    return any(g.graph_id == graph_id for g in graphs)
 
 
 def _create_graph(client: Any, graph_id: str, description: str) -> None:
@@ -76,6 +77,11 @@ def bootstrap(dry_run: bool = True) -> None:
         sys.exit(1)
 
     import os
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
+    except ImportError:
+        pass  # dotenv opcional — si la env ya está en shell, funciona igual
 
     api_key = os.getenv("ZEP_API_KEY")
     if not api_key:
@@ -90,7 +96,7 @@ def bootstrap(dry_run: bool = True) -> None:
             continue
         print(f"[create] {gid}")
         _create_graph(client, gid, GRAPH_DESCRIPTIONS[kind])
-        print(f"[create] ✓ {gid} creado")
+        print(f"[create] OK {gid} creado")
 
 
 def main() -> None:
