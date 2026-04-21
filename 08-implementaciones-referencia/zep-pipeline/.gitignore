@@ -1,0 +1,36 @@
+# Env y secretos
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Audit reports (generados por audit_edge_entropy.py)
+audit_reports/
+
+# UUID map (generado en Fase 2 por canonical_ingester)
+canonical_uuid_map.json
+
+# Logs de ingesta
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
