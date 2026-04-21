@@ -8,7 +8,7 @@
 
 ## 🔖 Metadatos
 
-- **Última actualización:** 2026-04-20 (tercera sesión — ADR-002 aprobado, giro a Node)
+- **Última actualización:** 2026-04-21 (tercera sesión — Fase 3 cerrada, canonical + evidence ingestados)
 - **Actualizado por:** Arquitecto (CPU) + Agente Claude (GPU)
 - **Fase PEAP-V5:** Fuera del ciclo — meta-documentación viva
 - **Rama activa:** `master`
@@ -34,11 +34,11 @@ Este repo **no** está en un ciclo fundacional PEAP-V5. Es el Exocórtex canóni
 | Fase | Entregable | Estado |
 |---|---|---|
 | **Fase 1 — Especificación técnica** | ADR-001 + schema metadata + ingestion policy + ontology Pydantic + scaffolding | ✅ **Cerrada** (3 docs consolidados en `zep-pipeline/docs/` + ontology/ Pydantic completo + scaffolding completo) |
-| **Fase 2.0 — Extracción de `lib/` Node compartida** | ADR-002 aprobado + 6 módulos Node puros parametrizados (`zep_metadata.js`, `zep_batching.js`, `zep_bitemporal.js`, `zep_delta_engine.js`, `zep_contrast_emitter.js`, `zep_polling.js`) + catálogo `lecciones_heredadas_de_arca.md` + unit tests vitest | 🟡 **Próximo bloqueante** — ADR-002 aprobado, extracción por empezar |
-| **Fase 2.1 — Pipeline canonical (Node)** | `bootstrap_graphs.py --apply` + `setup_ontology.py --apply` + `canonical_ingester.js` consumiendo `lib/` + queries de validación | ⚪ Pendiente Fase 2.0 |
-| **Fase 3 — Pipeline evidence (Node)** | `evidence_ingester.js` consumiendo `lib/` + detección bitemporal + cross-graph UUID | ⚪ Pendiente |
-| **Fase 4 — Delta ingester Node** | `delta_ingester.js` consumiendo `lib/zep_delta_engine.js` + `git tag ultimo-zep-sync` + hard-stop on batch failure + GitHub Action | ⚪ Pendiente |
-| **Fase 5 — Integración Claude Code** | Slash command `/consultar-cerebro-inl` + skill `inl-graph-oracle` + 5ª auditoría en `/audit-coherencia-docs` | ⚪ Pendiente |
+| **Fase 2.0 — Extracción de `lib/` Node compartida** | Scope **reducido** a ingesta puntual (no CI): 2 copias literales (`chunker.js`, `frontmatter_parser.js`) + 2 extracciones parametrizadas (`zep_metadata.js`, `zep_batching.js`) + catálogo `lecciones_heredadas_de_arca.md` (11 lecciones) + unit tests vitest | ✅ **Cerrada** (sesión 3) |
+| **Fase 2.1 — Pipeline canonical (Node)** | 2 grafos creados + ontología aplicada (5E+6Ed canonical, 5E+6Ed evidence) + `canonical_ingester.js` ejecutado: 50 nodos + 21 edges + 569 body episodes ingestados. Smoke test positivo vía MCP. | ✅ **Cerrada** (sesión 3, 2026-04-21 00:26 ART) |
+| **Fase 3 — Pipeline evidence (Node)** | `evidence_ingester.js` + `evidence_source_map.js`: **17 nodos + 14 edges + 358 body episodes** en `inl-framework-evidence`. Cross-graph resolution por regex `(F\|O\|R\|C\|A\|G\|AP\|Dia)-\d+` sobre body → refs en metadata `canonical_refs_csv` (no edges cross-graph — grafos standalone aislados por diseño). ADR-001 detecta 15 refs canonical. | ✅ **Cerrada** (sesión 3, 2026-04-21 00:34 ART) |
+| **Fase 4 — Delta ingester Node** | FUERA DEL SCOPE "ingesta puntual" del ADR-002 reducido. Si en el futuro se necesita ingesta continua post-merge vía GitHub Actions, se abre ADR nuevo + se extraen los 4 módulos adicionales (zep_delta_engine, zep_contrast_emitter, zep_polling, etc.) de ARCA. | ⚪ **Diferida** (out-of-scope sprint actual) |
+| **Fase 5 — Integración Claude Code** | Slash command `/consultar-cerebro-inl` + skill `inl-graph-oracle` + 5ª auditoría en `/audit-coherencia-docs`. Consume los 2 grafos via MCP Zep para retorno semántico al operador. | 🟡 **Próximo bloqueante** |
 | **Fase 6 (futura, out-of-scope)** | Refactor ARCA para consumir `zep-pipeline/lib/` (ADR-003 cuando corresponda) | ⚪ Fuera del sprint actual |
 
 **Iniciativa previa (cerrada):** Personalización de Claude Code para el repo INL — 4 fases completadas + tests T1-T6 PASS. Documentada en `REGISTRO_TRAUMAS.md 2026-04-20` (3 entradas).
@@ -78,11 +78,11 @@ Este repo **no** está en un ciclo fundacional PEAP-V5. Es el Exocórtex canóni
 
 ### Para ejecutar Fases 2-5
 
-5. 🟡 **Fase 2.0 — Extracción de `lib/` Node compartida** — próximo bloqueante (ADR-002 aprobado 2026-04-20). Requiere: leer los 4 scripts ARCA (`zep_sensor_emitter.js`, `zep_pr_ingest.js`, `zep_daily_emitter.js`, `zep_narrative_emitter.js`) → extraer funciones puras parametrizables a 6 módulos `lib/` → unit tests vitest → catálogo `docs/lecciones_heredadas_de_arca.md` con 13+ lecciones empíricas.
-6. ⚪ **Fase 2.1 — Ingesta bootstrap canonical (Node)** — requiere Fase 2.0. Cargar `ZEP_API_KEY` del proyecto INL en `.env` → `bootstrap_graphs.py --apply` (Python) → `setup_ontology.py --apply` (Python) → `canonical_ingester.js` consumiendo `lib/` → smoke test + `audit_edge_entropy.py` pasa.
-7. ⚪ Fase 3 — `evidence_ingester.js` con detección bitemporal + cross-graph UUID
-8. ⚪ Fase 4 — `delta_ingester.js` post-merge con GitHub Action
-9. ⚪ Fase 5 — Integración Claude Code (slash + skill)
+5. ✅ **Fase 2.0 — Extracción de `lib/` Node compartida** — cerrada en sesión 3 con scope reducido. Entregables: `zep-pipeline/lib/{chunker.js, frontmatter_parser.js, zep_metadata.js, zep_batching.js}` + `zep-pipeline/tests/lib/{zep_metadata.test.js, zep_batching.test.js}` + `zep-pipeline/docs/lecciones_heredadas_de_arca.md` con 11 lecciones + `package.json` actualizado a CommonJS + `lib/README.md` documentado.
+6. ✅ **Fase 2.1 — Ingesta bootstrap canonical (Node)** — cerrada en sesión 3. Entregables: `zep-pipeline/ingesters/canonical_source_map.js` (mapa declarativo: 28 staticNodes + 5 fileMappings + 21 staticEdges) + `zep-pipeline/ingesters/canonical_ingester.js` (ingester Node con fallback HTTP directo al wire format snake_case porque el SDK 2.22 no serializa `graph_id`) + ontología Pydantic corregida (`EntityEdgeSourceTarget` import top-level) + ingesta ejecutada contra tenant `inl_framework`: **50 nodos + 21 edges + 569 body episodes** en `inl-framework-canonical`.
+7. ✅ **Fase 3 — Evidence ingester** — cerrada en sesión 3. Entregables: `zep-pipeline/ingesters/evidence_source_map.js` (mapa: 3 staticNodes + 3 fileMappings + 2 staticEdges) + `zep-pipeline/ingesters/evidence_ingester.js` (mismo patrón HTTP directo que canonical, con extracción de canonical_refs por regex y edges EMERGIO_EN/GENERADO_EN dinámicos). Ingesta ejecutada: 17 nodos + 14 edges + 358 body episodes en `inl-framework-evidence`. Smoke test positivo.
+8. ⚪ **Fase 4 — Delta ingester** — diferida fuera de scope (ADR-002 reducido era ingesta puntual local, no continuous CI).
+9. 🟡 **Fase 5 — Integración Claude Code** — próximo bloqueante. Consumir los 2 grafos Zep via MCP desde skills/slash commands para retorno semántico al operador. Componentes: (a) slash command `/consultar-cerebro-inl` que hace `zep_graph_search` scope=edges con cross_encoder sobre los 2 grafos; (b) skill `inl-graph-oracle` en `.claude/skills/` con protocolo ReAct para consulta orientada; (c) 5ª auditoría en `/audit-coherencia-docs` que compara los códigos canonical del repo filesystem vs los nodos canonical ingestados en Zep (detecta drift).
 
 ### Meta / gobernanza
 
@@ -104,20 +104,25 @@ Este repo **no** está en un ciclo fundacional PEAP-V5. Es el Exocórtex canóni
 
 ## 🧱 Próximo paso bloqueante
 
-**Fase 2.0 — Extracción de librería Node compartida** (ADR-002 aprobado 2026-04-20 sesión 3). Arranque requiere, en orden:
+**Fase 5 — Integración Claude Code** (Fases 2.0 + 2.1 + 3 cerradas; Fase 4 diferida). Arranque:
 
-1. Crear `zep-pipeline/docs/lecciones_heredadas_de_arca.md` — catálogo con 13+ lecciones empíricas de ARCA (origen en PR/commit ARCA + función en `lib/` que la encapsula + test de validación).
-2. Extraer `zep-pipeline/lib/zep_metadata.js` — `sanitizeFrontmatterForZep()` + `capMetadataKeys()` desde `zep_daily_emitter.js`.
-3. Extraer `zep-pipeline/lib/zep_batching.js` — batching resiliente con hard-stop + sleep configurables.
-4. Extraer `zep-pipeline/lib/zep_bitemporal.js` — ruteo histórico/vivo (`birthtime` vs `mtime` vs fecha-body) + ordenamiento cronológico.
-5. Extraer `zep-pipeline/lib/zep_delta_engine.js` — core de detección A/M/D via `git diff --name-status` + hunks + `FORCE_FILES` + tag `ultimo-zep-sync`.
-6. Extraer `zep-pipeline/lib/zep_contrast_emitter.js` — patrón P15 para invalidación bitemporal en rotaciones workflow-level.
-7. Extraer `zep-pipeline/lib/zep_polling.js` — L3 polling con timeout no-bloqueante (fix P19).
-8. Unit tests vitest en `zep-pipeline/tests/` cubriendo cada módulo sobre datasets sintéticos.
-9. Checkpoint CPU antes de avanzar a Fase 2.1.
+1. **Slash command `/consultar-cerebro-inl`** en `.claude/commands/consultar-cerebro-inl.md`. Toma argumento con query del operador, invoca `mcp__zep__zep_graph_search` con `graph_id` rotando entre `inl-framework-canonical` y `inl-framework-evidence`, combina resultados, devuelve bloque de contexto semántico. Reranker `cross_encoder` default.
+2. **Skill `inl-graph-oracle`** en `.claude/skills/inl-graph-oracle/SKILL.md` con protocolo ReAct:
+   - Paso 1: identificar si la query es sobre LEY/PATRÓN (→ canonical) o EVIDENCIA/AVANCE/ADR (→ evidence) o ambos.
+   - Paso 2: query inicial con scope=edges (facts legibles).
+   - Paso 3: si retorna códigos `(F|O|R|C|A|G|AP|Dia)-\d+` en los facts, consulta follow-up al grafo apropiado para expandir contexto.
+   - Paso 4: sintetiza respuesta con los facts + citas (source_node_name + target_node_name).
+3. **5ª auditoría en `/audit-coherencia-docs`** — compara códigos canonical del filesystem vs nodos ingestados en Zep. Detecta: (a) códigos en repo sin nodo Zep (drift por falta de ingesta), (b) nodos Zep sin código en repo (obsoletos no invalidados). Reporta JSON en `audit_reports/`.
+4. Verificación empírica: lanzar `/consultar-cerebro-inl "qué pasa si violo F-1?"` → debe retornar los edges PROHIBE + CONTRADICE + menciones en evidence.
 
-Estimación: ~2 sesiones GPU + checkpoints CPU por módulo extraído.
+Estimación: ~2h GPU para Fase 5 completa.
 
-**Después de Fase 2.0:** Fase 2.1 — bootstrap canonical con `canonical_ingester.js` consumiendo `lib/`, precedido por `bootstrap_graphs.py --apply` + `setup_ontology.py --apply` (ambos Python sin cambios, validados por ADR-001).
+## 📌 Traumas de runtime resueltos en Fase 2.1 (documentados para futura referencia)
+
+- **SDK Zep Cloud Node 2.22.0 no serializa `graph_id`** — solo `group_id`/`user_id` via Fern-generated serializer. La API backend SÍ acepta `graph_id` para standalone graphs. Fix: llamada HTTP directa via `fetch()` a `/api/v2/graph/add-fact-triple` y `/api/v2/graph-batch` (endpoint correcto, NO `/graph/add-batch`) con payload en snake_case.
+- **SDK Zep Cloud Python 3.20.0 reubica `EntityEdgeSourceTarget`** — vive en top-level `from zep_cloud import EntityEdgeSourceTarget`, NO en `zep_cloud.external_clients.ontology`. La ontología de Fase 1 asumía el path viejo.
+- **API prohíbe source_node_name == target_node_name** — `addFactTriple` rechaza self-referential triples con 400. Fix: crear nodo raíz `INL-Framework` y que cada entity canonical se relacione a él via `IS_PART_OF_FRAMEWORK` en vez de self-edges.
+- **`client.graph.list_all()` retorna tupla paginada** — no iterable directo de objetos. Acceder via `response.graphs`.
+- **Encoding Windows cp1252** — `print("✓")` rompe en `cmd.exe`. Reemplazar caracteres Unicode (✓/✗) por ASCII (OK/FAIL) en scripts Python que corran bajo consola Windows por default.
 
 **Commit pendiente:** Ley F-6 HITL — lo ejecuta el Arquitecto cuando decida. Los cambios actuales están en disco sin commitear (preferencia `feedback_modo_trabajo` + cláusula de inmutabilidad de `CONSTITUCION.md`).

@@ -120,10 +120,12 @@ def build_evidence_payload() -> dict[str, Any]:
 def _verify_graphs_exist(client: Any, graph_ids: list[str]) -> list[str]:
     """
     Retorna la lista de graph_ids que NO existen en el proyecto actual.
-    Usa `list_all_graphs()` del SDK Zep.
+    Usa `list_all()` paginado del SDK Zep.
     """
 
-    existing = {g.graph_id for g in client.graph.list_all()}
+    response = client.graph.list_all(page_number=1, page_size=100)
+    graphs = response.graphs if hasattr(response, "graphs") else []
+    existing = {g.graph_id for g in graphs}
     return [gid for gid in graph_ids if gid not in existing]
 
 
@@ -147,7 +149,7 @@ def _apply_to_graph(
         entities=entities,
         edges=edges,
     )
-    print(f"  [apply] ✓ ontologia aplicada a {graph_id}")
+    print(f"  [apply] OK ontologia aplicada a {graph_id}")
 
 
 def apply_ontology(which: str = "both") -> None:
@@ -167,6 +169,11 @@ def apply_ontology(which: str = "both") -> None:
         sys.exit(1)
 
     import os
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
+    except ImportError:
+        pass
 
     api_key = os.getenv("ZEP_API_KEY")
     if not api_key:

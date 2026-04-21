@@ -1,18 +1,19 @@
 {
   "name": "zep-pipeline-inl",
-  "version": "0.1.0-fase1",
-  "description": "Pipeline dual Python/Node.js para el cerebro Zep del Framework INL. Delta ingester Node + libs compartidas con ARCA.",
+  "version": "0.2.0-fase2.0",
+  "description": "Pipeline híbrido Python (ontología) + Node.js (ingesta) para el cerebro Zep del Framework INL. Librería lib/ compartida con ARCA (ADR-002).",
   "private": true,
-  "type": "module",
   "scripts": {
-    "delta": "node ingesters/delta_ingester.js",
-    "delta:dry": "node ingesters/delta_ingester.js --dry-run",
-    "test": "echo 'Tests Fase 4+' && exit 0"
+    "bootstrap:canonical": "node ingesters/canonical_ingester.js",
+    "bootstrap:canonical:dry": "node ingesters/canonical_ingester.js --dry-run",
+    "bootstrap:evidence": "node ingesters/evidence_ingester.js",
+    "bootstrap:evidence:dry": "node ingesters/evidence_ingester.js --dry-run",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@getzep/zep-cloud": "^2.0.0",
-    "gray-matter": "^4.0.3",
-    "simple-git": "^3.22.0"
+    "dotenv": "^16.4.0"
   },
   "devDependencies": {
     "vitest": "^1.2.0"
