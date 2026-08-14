@@ -10,7 +10,7 @@
 Un repositorio de conocimiento sobre una forma de construir software donde el cuello de botella no es el tamaño del equipo.
 
 No es un framework con dependencias. No tiene un `npm install` que te salve.
-Es un conjunto de principios, patrones y protocolos destilados de ciclos reales de construcción — donde un arquitecto trabajando con agentes IA y este framework produjo un sistema de complejidad enterprise en un ciclo comprimido. Las métricas están documentadas en [`05-evidencia/`](05-evidencia/), no extrapoladas.
+Es un conjunto de principios, patrones y protocolos destilados de ciclos reales de construcción y trabajo — donde un solo desarrollador trabajando con agentes IA y este framework produjo un sistema de complejidad enterprise en un ciclo comprimido. Las métricas están documentadas en [`05-evidencia/`](05-evidencia/), no extrapoladas.
 
 El punto central no es la velocidad. Es esto:
 
