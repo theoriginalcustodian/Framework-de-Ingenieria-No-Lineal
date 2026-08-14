@@ -1,7 +1,7 @@
 # Ingeniería No Lineal — V5
 
 > *"El problema con la ingeniería lineal no es que sea lenta.
-> El problema es que asume que la única forma de escalar el impacto es escalar el headcount."*
+> El problema es que asume que la única forma de escalar el tamaño es escalar el capital humano."*
 
 ---
 
